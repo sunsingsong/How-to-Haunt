@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 // Game manager singleton
 // Store any game state needed here
@@ -6,4 +8,7 @@
 
 public class GameManager : MonoBehaviour {
 	public int time = 347;
+
+	public string ghost1ObjectName = "";
+	public string ghost2ObjectName = "";
 }
