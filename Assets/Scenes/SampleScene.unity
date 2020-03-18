@@ -3245,6 +3245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: {fileID: 114374992}
   Player2: {fileID: 255091918}
+  speed: 20
 --- !u!65 &114374994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42633,7 +42634,7 @@ MonoBehaviour:
   - {fileID: 174691920}
   - {fileID: 917659981}
   - {fileID: 1404567440}
-  speed: 15
+  speed: 20
 --- !u!54 &2106920588
 Rigidbody:
   m_ObjectHideFlags: 0
