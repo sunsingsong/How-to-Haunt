@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 20930480}
   - component: {fileID: 20930479}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3688,8 +3688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player1: {fileID: 114374992}
-  Player2: {fileID: 255091918}
   speed: 20
+  ghost1Intersect: 0
 --- !u!65 &114374994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7014,6 +7014,7 @@ GameObject:
   - component: {fileID: 255091920}
   - component: {fileID: 255091919}
   - component: {fileID: 255091923}
+  - component: {fileID: 255091924}
   m_Layer: 0
   m_Name: Ghost 2
   m_TagString: Untagged
@@ -7111,6 +7112,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &255091924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255091918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e221876acb71b46bc29220ccd60d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player2: {fileID: 255091918}
+  speed: 20
+  ghost2Intersect: 0
 --- !u!1 &258614184
 GameObject:
   m_ObjectHideFlags: 0
@@ -31082,7 +31098,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-19260
+  m_Name: pb_Mesh13926
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -49461,6 +49477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186ab9440abf8dd40af26a04cb460e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleColor: {r: 1, g: 0.8980392, b: 0, a: 0.5686275}
+  activeColor: {r: 1, g: 0.02357398, b: 0, a: 0.5686275}
   target:
   - {fileID: 1404567440}
   - {fileID: 917659981}
@@ -49487,6 +49505,9 @@ MonoBehaviour:
   - {fileID: 174691920}
   - {fileID: 917659981}
   - {fileID: 1404567440}
+  Sight: {fileID: 20930476}
+  ghost1: {fileID: 114374992}
+  ghost2: {fileID: 255091918}
   speed: 20
 --- !u!54 &2106920588
 Rigidbody:

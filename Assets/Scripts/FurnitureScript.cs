@@ -7,11 +7,37 @@ public class FurnitureScript : MonoBehaviour {
 	public GameObject ghost1;
 	public GameObject ghost2;
 
+	private bool isCollision1;
+	private bool isCollision2;
+
+	void Start(){
+		isCollision1 = false;
+		isCollision2 = false;
+	}
+
 	void Update() {
 		Renderer renderer = GetComponent<Renderer>();
 
 		bool ghost1Intersect = ghost1.GetComponent<Renderer>().bounds.Intersects(renderer.bounds);
+		if (ghost1Intersect){
+			ghost1.GetComponent<Ghost_move1>().ghost1Intersect = ghost1Intersect;
+			isCollision1=true;
+		}else{
+			if (isCollision1 && !ghost1Intersect){
+				ghost1.GetComponent<Ghost_move1>().ghost1Intersect = false;
+				isCollision1=false;
+			}
+		}
 		bool ghost2Intersect = ghost2.GetComponent<Renderer>().bounds.Intersects(renderer.bounds);
+		if (ghost2Intersect){
+			ghost2.GetComponent<Ghost_move2>().ghost2Intersect = ghost2Intersect;
+			isCollision2=true;
+		}else{
+			if (isCollision2){
+				ghost2.GetComponent<Ghost_move2>().ghost2Intersect = false;
+				isCollision2=false;
+			}
+		}
 
 		renderer.material.SetColor("_Color", (ghost1Intersect || ghost2Intersect) && !(ghost1Intersect && ghost2Intersect) ? activeColor : idleColor);
 
