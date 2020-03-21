@@ -46,4 +46,8 @@ public class Human_move_1 : MonoBehaviour
 
         sight.material.SetColor("_Color", (ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect) ? activeColor : idleColor);
     }
+
+    public Renderer getSight() {
+        return sight;
+    }
 }
