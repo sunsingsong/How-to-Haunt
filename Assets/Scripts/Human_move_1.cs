@@ -22,6 +22,8 @@ public class Human_move_1 : MonoBehaviour
     {
         sight = Sight.GetComponent<Renderer>();
         direction = target[current].position - transform.position;
+        print(target[current].position);
+        print(transform.position);
         angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;
         transform.eulerAngles = Vector3.up * angle;
     }
@@ -29,10 +31,25 @@ public class Human_move_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position != target[current].position)
+        print(target[current].position.x);
+        print(transform.position.x);
+        print("direction.................................................");
+        print(direction.x);
+        if((direction.x==0.0f && ((direction.z > 0 && target[current].position.z > transform.position.z)||(direction.z < 0 && target[current].position.z < transform.position.z)))||(direction.z==0.0f && ((direction.x > 0 && target[current].position.x > transform.position.x)||(direction.x < 0 && target[current].position.x < transform.position.x))))
         {
-            Vector3 pos = Vector3.MoveTowards(transform.position, target[current].position, speed*Time.deltaTime);
-            GetComponent<Rigidbody>().MovePosition(pos);
+            if (direction.x == 0.0f){
+                if (direction.z > 0){
+                    transform.Translate(Vector3.forward * speed * Time.deltaTime,Space.World);
+                }else{
+                    transform.Translate(Vector3.back * speed * Time.deltaTime,Space.World);
+                }
+            }else{
+                if (direction.x > 0){
+                    transform.Translate(Vector3.right * speed * Time.deltaTime,Space.World);
+                }else{
+                    transform.Translate(Vector3.left * speed * Time.deltaTime,Space.World);
+                }
+            }
         }
         else {
             current = (current+1)%target.Length;

@@ -3809,7 +3809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player1: {fileID: 114374992}
-  speed: 20
+  speed: 6
   ghost1Intersect: 0
 --- !u!65 &114374994
 BoxCollider:
@@ -3899,7 +3899,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!43 &120169569
 Mesh:
@@ -7231,7 +7231,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &255091924
 MonoBehaviour:
@@ -7246,7 +7246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player2: {fileID: 255091918}
-  speed: 20
+  speed: 6
   ghost2Intersect: 0
 --- !u!1 &258614184
 GameObject:
@@ -16184,7 +16184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701217420}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 21}
+  m_LocalPosition: {x: 13, y: 0, z: 21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954799137}
@@ -20095,7 +20095,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917659980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
+  m_LocalPosition: {x: 13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954799137}
@@ -32003,7 +32003,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13972
+  m_Name: pb_Mesh13946
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32492,7 +32492,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh13922
+  m_Name: pb_Mesh13956
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -50198,8 +50198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186ab9440abf8dd40af26a04cb460e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleColor: {r: 0, g: 0, b: 0, a: 0}
-  activeColor: {r: 0, g: 0, b: 0, a: 0}
+  idleColor: {r: 1, g: 0.9203695, b: 0, a: 0.5686275}
+  activeColor: {r: 1, g: 0, b: 0, a: 0.5686275}
   target:
   - {fileID: 1404567440}
   - {fileID: 917659981}
@@ -50229,7 +50229,7 @@ MonoBehaviour:
   Sight: {fileID: 20930476}
   ghost1: {fileID: 114374992}
   ghost2: {fileID: 255091918}
-  speed: 20
+  speed: 6
 --- !u!54 &2106920588
 Rigidbody:
   m_ObjectHideFlags: 0

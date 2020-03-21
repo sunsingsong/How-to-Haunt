@@ -17,16 +17,16 @@ public class Ghost_move2 : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(-1.0f, 0.0f, 0.0f), speed*Time.deltaTime));
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.RightArrow)) {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(1.0f, 0.0f, 0.0f), speed*Time.deltaTime));
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.UpArrow)) {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, 1.0f), speed*Time.deltaTime));
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.DownArrow)) {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, -1.0f), speed*Time.deltaTime));
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.RightShift)) {
             GameManager gameManager = FindObjectOfType<GameManager>();
