@@ -34,7 +34,7 @@ public class Human_move_1 : MonoBehaviour
             Vector3 pos = Vector3.MoveTowards(transform.position, target[current].position, speed*Time.deltaTime);
             GetComponent<Rigidbody>().MovePosition(pos);
         }
-        else{
+        else {
             current = (current+1)%target.Length;
             direction = target[current].position - target[current-1].position;
             angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;

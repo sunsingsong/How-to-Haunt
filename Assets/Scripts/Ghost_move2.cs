@@ -16,27 +16,22 @@ public class Ghost_move2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Player2)
-        {
-            //Processing Player2 inputs
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
+        if (Input.GetKey(KeyCode.LeftArrow)) {
             Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(-1.0f, 0.0f, 0.0f), speed*Time.deltaTime));
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(1.0f, 0.0f, 0.0f), speed*Time.deltaTime));
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, 1.0f), speed*Time.deltaTime));
-            }
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, -1.0f), speed*Time.deltaTime));
-            }
         }
-
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(1.0f, 0.0f, 0.0f), speed*Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.UpArrow)) {
+            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, 1.0f), speed*Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.DownArrow)) {
+            Player2.GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(Player2.transform.position, Player2.transform.position + new Vector3(0.0f, 0.0f, -1.0f), speed*Time.deltaTime));
+        }
+        if (Input.GetKey(KeyCode.RightShift)) {
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.activateFurniture(2);
+        }
     }
 }
 

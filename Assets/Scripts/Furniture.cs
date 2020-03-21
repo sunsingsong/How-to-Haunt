@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FurnitureScript : MonoBehaviour {
+public class Furniture : MonoBehaviour {
 	public Color idleColor = new Color(0.98f, 0.48f, 1.0f); // FB7CFF
 	public Color activeColor = new Color(0.47f, 0.1f, 0.61f); // 781A9C
 	public Color cooldownColor = new Color(0f, 0f, 0f);
@@ -74,10 +74,13 @@ public class FurnitureScript : MonoBehaviour {
 		}
 	}
 
+	public bool isActivatable() {
+		return cooldown <= 0;
+	}
+
 	public void activate() {
 		if (cooldown > 0) return;
-		cooldown = 1000;
-
+		cooldown = 20;
 	}
 
 	private void findSawFurniture() {
@@ -86,11 +89,9 @@ public class FurnitureScript : MonoBehaviour {
 		if(sight != null){
 			if(GetComponent<Renderer>().bounds.Intersects(sight.bounds)){
 				 gameManager.sawFurnitures[name] = true;
-				 Debug.Log(name+" TRUE");
 			}
 			else {
 				gameManager.sawFurnitures[name] = false;
-				Debug.Log(name+" FALSE");
 			}
 		}
 	}

@@ -35,7 +35,17 @@ public class GameManager : MonoBehaviour {
 		return time;
 	}
 
-	public bool isScaredSuccess(int ghostNumber){
-		return (ghostNumber == 1) ? sawFurnitures[ghost1ObjectName] : sawFurnitures[ghost2ObjectName];
+	public bool activateFurniture(int ghostNumber){
+		bool success = (ghostNumber == 1) ? sawFurnitures[ghost1ObjectName] : sawFurnitures[ghost2ObjectName];
+		string name = (ghostNumber == 1) ? ghost1ObjectName : ghost2ObjectName;
+		Furniture furniture = GameObject.Find(name).GetComponent<Furniture>();
+		if (furniture && furniture.isActivatable()) {
+			furniture.activate();
+		}
+		if (success) {
+			increaseFearValue(15);
+			// TODO: Stun?
+		}
+		return success;
 	}
 }
