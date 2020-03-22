@@ -6606,7 +6606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -479, y: -19}
+  m_AnchoredPosition: {x: -376, y: -19}
   m_SizeDelta: {x: 20, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216230029
@@ -13289,11 +13289,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b3c6a02da649d6bf72f525612bbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 50
+  time: 90
   isWon: 0
   ghost1ObjectName: 
   ghost2ObjectName: 
-  humanState: 0
 --- !u!1 &607311561
 GameObject:
   m_ObjectHideFlags: 0
@@ -18192,7 +18191,6 @@ MonoBehaviour:
   isWon: 0
   ghost1ObjectName: 
   ghost2ObjectName: 
-  humanState: 0
 --- !u!4 &787599067
 Transform:
   m_ObjectHideFlags: 0
@@ -28872,7 +28870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -145, y: 231}
+  m_AnchoredPosition: {x: -40, y: 164}
   m_SizeDelta: {x: 700, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1167824863
@@ -28969,7 +28967,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14830
+  m_Name: pb_Mesh14798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
