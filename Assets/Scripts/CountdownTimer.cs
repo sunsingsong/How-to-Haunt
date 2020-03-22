@@ -46,7 +46,7 @@ public class CountdownTimer : MonoBehaviour {
 
     private void showPanel(){
         gameOverPanel.gameObject.SetActive (true);
-        SceneManager.LoadScene(0);
+       
     }
 	
 }

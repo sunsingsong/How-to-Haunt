@@ -80,7 +80,7 @@ public class Furniture : MonoBehaviour {
 
 	public void activate() {
 		if (cooldown > 0) return;
-		cooldown = 20;
+		cooldown = 12;
 	}
 
 	private void findSawFurniture() {

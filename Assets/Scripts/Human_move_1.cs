@@ -21,8 +21,13 @@ public class Human_move_1 : MonoBehaviour
     private bool haunted=false;
     private string[] room = {"target 0","target 4","target 11","target 14"};
 
+    float currentTime = 0f;
+	float startingTime = 5f;
+
     void Start()
     {
+        speed = 6;
+        currentTime = startingTime;
         GameManager = FindObjectOfType<GameManager>();
         sight = Sight.GetComponent<Renderer>();
         direction = target[current].position - transform.position;
@@ -37,9 +42,12 @@ public class Human_move_1 : MonoBehaviour
         bool ghost1Seen = ghost1.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
 		bool ghost2Seen = ghost2.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
         if ((ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect)){
-            GameManager.setHumanState(2);
+            if(GameManager.getHumanState() != 1){
+                GameManager.setHumanState(2);
+            }
         }
-        sight.material.SetColor("_Color", (ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect) ? activeColor : idleColor);
+
+        sight.material.SetColor("_Color", (GameManager.getHumanState() == 2) ? activeColor : idleColor );
 
         if (GameManager.getHumanState()==0)
         {
@@ -67,6 +75,8 @@ public class Human_move_1 : MonoBehaviour
             }
         }else if (GameManager.getHumanState()==1){
             //Stun + Add FearGauge
+            speed = 0;
+            countdown();
             print("Nothing");
         }else{
             //Run + Add FearGauge
@@ -114,4 +124,16 @@ public class Human_move_1 : MonoBehaviour
     public Renderer getSight() {
         return sight;
     }
+
+    public void countdown(){
+ 			 currentTime -=  1 * Time.deltaTime;
+			 if(currentTime <= 0) {
+			 	currentTime = 0;
+                speed = 6;
+				GameManager.setHumanState(0);
+                currentTime = startingTime;
+                print(GameManager.getHumanState());
+                print("setState0");
+			 }
+	}
 }
