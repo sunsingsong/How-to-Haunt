@@ -19,6 +19,7 @@ public class Human_move_1 : MonoBehaviour
     private Renderer sight;
     private Vector3 direction;
     private bool haunted=false;
+    private string[] room = {"target 0","target 4","target 11","target 14"};
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Human_move_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(GameManager.getHumanState());
         bool ghost1Seen = ghost1.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
 		bool ghost2Seen = ghost2.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
         if ((ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect)){
@@ -92,10 +94,19 @@ public class Human_move_1 : MonoBehaviour
                 }
             }
             else {
-                current = (current+target.Length-1)%target.Length;
-                direction = target[current].position - target[current+1].position;
-                angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;
-                transform.eulerAngles = Vector3.up * angle;
+                foreach (string x in room){
+                    if (x.Equals(target[current].name)){
+                        GameManager.setHumanState(0);
+                        haunted = false;
+                        break;
+                    }
+                }
+                if (GameManager.getHumanState()==2){
+                    current = (current+target.Length-1)%target.Length;
+                    direction = target[current].position - target[current+1].position;
+                    angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;
+                    transform.eulerAngles = Vector3.up * angle;
+                }
             }
         }
     }

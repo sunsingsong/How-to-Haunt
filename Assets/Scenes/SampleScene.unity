@@ -13293,6 +13293,7 @@ MonoBehaviour:
   isWon: 0
   ghost1ObjectName: 
   ghost2ObjectName: 
+  humanState: 0
 --- !u!1 &607311561
 GameObject:
   m_ObjectHideFlags: 0
@@ -18191,6 +18192,7 @@ MonoBehaviour:
   isWon: 0
   ghost1ObjectName: 
   ghost2ObjectName: 
+  humanState: 0
 --- !u!4 &787599067
 Transform:
   m_ObjectHideFlags: 0
@@ -50230,6 +50232,7 @@ MonoBehaviour:
   ghost1: {fileID: 114374992}
   ghost2: {fileID: 255091918}
   speed: 6
+  GameManager: {fileID: 0}
 --- !u!54 &2106920588
 Rigidbody:
   m_ObjectHideFlags: 0
