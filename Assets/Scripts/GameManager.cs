@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour {
 	public string ghost1ObjectName = "";
 	public string ghost2ObjectName = "";
 	public Dictionary<string,bool> sawFurnitures;
+	public int humanState; // 0=Normal, 1=Stun, 2=Run
 
 	void Start() {
+		humanState = 0;
 		sawFurnitures = new Dictionary<string, bool>();
 		for (int i = 1; i <= 12; i++) {
 			sawFurnitures.Add("Furniture"+i,false);
@@ -47,5 +49,13 @@ public class GameManager : MonoBehaviour {
 			// TODO: Stun?
 		}
 		return success;
+	}
+
+	public int getHumanState(){
+		return humanState;
+	}
+
+	public void setHumanState(int x){
+		humanState=x;
 	}
 }
