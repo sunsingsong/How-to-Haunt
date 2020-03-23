@@ -31,7 +31,7 @@ public class Human_move_1 : MonoBehaviour
 
     void Start()
     {
-        speed = walkSpeed;
+        speed = walkSpeed*3;
         currentLockdownTime = lockdownTime;
         GameManager = FindObjectOfType<GameManager>();
         sight = Sight.GetComponent<Renderer>();
@@ -109,7 +109,6 @@ public class Human_move_1 : MonoBehaviour
                     }
                 }
             } else {
-                print("Max Kaka");
                 foreach (string x in room) {
                     print(x + " " + target[current].name);
                     if (x.Equals(target[current].name)) {

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	public float timeLeft = 0f;
 	public Dictionary<string,bool> sawFurnitures;
 
-	private int humanState = 0; // 0 = Normal, 1 = Stun, 2 = Run, 3 = Lockdown 
+	private int humanState = -1; // 0 = Normal, 1 = Stun, 2 = Run, 3 = Lockdown 
 	float currentGaugeDecreaseCountdownTime = 0f;
 	float gaugeDecreaseCountdownTime = 10f;
 	bool shouldCountdown = false;

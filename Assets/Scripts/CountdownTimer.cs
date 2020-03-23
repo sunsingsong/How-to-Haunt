@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class CountdownTimer : MonoBehaviour {
 
 	public Text timeLabel;
+    public Slider fearGauge;
     public GameManager GameManager;
     public RectTransform gameOverPanel;
     public GameObject Player1;
@@ -19,6 +20,7 @@ public class CountdownTimer : MonoBehaviour {
     bool isStart = false ;
 	void Start() {
         timeLabel.gameObject.SetActive(false);
+        fearGauge.gameObject.SetActive(false);
         GameManager = FindObjectOfType<GameManager>();
          if(GameManager != null){
             initTimer();
@@ -30,8 +32,9 @@ public class CountdownTimer : MonoBehaviour {
         showPanel();
         Player1.SetActive(GameManager.getHumanState() != -1);
         Player2.SetActive(GameManager.getHumanState() != -1);
-        if(currentTime <= 90f && !isStart){
+        if(currentTime <= 91f && !isStart){
             isStart = true;
+            fearGauge.gameObject.SetActive(true);
             timeLabel.gameObject.SetActive(true);
             GameManager.setHumanState(0);
         }
