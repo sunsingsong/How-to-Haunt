@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour {
 	public string ghost2ObjectName = "";
 	public Dictionary<string,bool> sawFurnitures;
 
-	private int humanState; // 0=Normal, 1=Stun, 2=Run
+	private int humanState; // 0 = Normal, 1 = Stun, 2 = Run, 3 = Lockdown
 
-	float currentTime = 0f;
-	float startingTime = 10f;
+	float currentGaugeDecreaseCountdownTime = 0f;
+	float gaugeDecreaseCountdownTime = 10f;
 	bool shouldCountdown = false;
 
 	private float fearValue = 0f;
@@ -31,12 +31,11 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void Update(){
-		if(shouldCountdown){
+	void Update() {
+		if (shouldCountdown) {
 			countdown();
-		}
-		else {
-			currentTime = startingTime;
+		} else {
+			currentGaugeDecreaseCountdownTime = gaugeDecreaseCountdownTime;
 		}
 	}
 
@@ -59,16 +58,14 @@ public class GameManager : MonoBehaviour {
 
 	public bool activateFurniture(int ghostNumber){
 		bool success = (ghostNumber == 1) ? sawFurnitures[ghost1ObjectName] : sawFurnitures[ghost2ObjectName];
-		string name = (ghostNumber == 1) ? ghost1ObjectName : ghost2ObjectName;
-		Furniture furniture = GameObject.Find(name).GetComponent<Furniture>();
+		string furnitureName = (ghostNumber == 1) ? ghost1ObjectName : ghost2ObjectName;
+		Furniture furniture = GameObject.Find(furnitureName).GetComponent<Furniture>();
 		if (success && furniture.isActivatable()) {
-			increaseFearValue(15);
+			increaseFearValue(20);
 			setHumanState(1);
-			currentTime = 10f;
+			currentGaugeDecreaseCountdownTime = 10f;
 		}
-		if (furniture.isActivatable()) {
-			furniture.activate();
-		}
+		furniture.activate();
 		return success;
 	}
 
@@ -81,9 +78,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void countdown(){
-		currentTime -=  1 * Time.deltaTime;
-		if(currentTime <= 0) {
-			currentTime = 3f;
+		currentGaugeDecreaseCountdownTime -=  1 * Time.deltaTime;
+		if(currentGaugeDecreaseCountdownTime <= 0) {
+			currentGaugeDecreaseCountdownTime = 3f;
 			decreaseFearValue(3);
 		}
 	}

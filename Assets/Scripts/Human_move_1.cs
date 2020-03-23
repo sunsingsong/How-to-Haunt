@@ -11,23 +11,28 @@ public class Human_move_1 : MonoBehaviour
     public GameObject Sight;
     public GameObject ghost1;
 	public GameObject ghost2;
-    public float speed;
-    public GameManager GameManager;
+
+    public float walkSpeed = 6f;
+    public float runSpeed = 9f;
+
+    private float speed;
+
+    private GameManager GameManager;
 
     private int current;
     private float angle;
     private Renderer sight;
     private Vector3 direction;
     private bool haunted=false;
-    private string[] room = {"target 16","target 17","target 18","target 19"};
+    private string[] room = {"target 16", "target 17", "target 18", "target 19"};
 
-    float currentTime = 0f;
-	float startingTime = 5f;
+    float currentLockdownTime = 0f;
+	float lockdownTime = 5f;
 
     void Start()
     {
-        speed = 6;
-        currentTime = startingTime;
+        speed = walkSpeed;
+        currentLockdownTime = lockdownTime;
         GameManager = FindObjectOfType<GameManager>();
         sight = Sight.GetComponent<Renderer>();
         direction = target[current].position - transform.position;
@@ -41,16 +46,14 @@ public class Human_move_1 : MonoBehaviour
         bool ghost1Seen = ghost1.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
 		bool ghost2Seen = ghost2.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
         if ((ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect)){
-            if(GameManager.getHumanState() != 1){
-                GameManager.setHumanState(2);
-            }
+            GameManager.setHumanState(2);
         }
 
         sight.material.SetColor("_Color", (GameManager.getHumanState() == 2 || GameManager.getHumanState() == 3) ? activeColor : idleColor );
 
-        if (GameManager.getHumanState()==0)
-        {
-            if((direction.x==0.0f && ((direction.z > 0 && target[current].position.z > transform.position.z)||(direction.z < 0 && target[current].position.z < transform.position.z)))||(direction.z==0.0f && ((direction.x > 0 && target[current].position.x > transform.position.x)||(direction.x < 0 && target[current].position.x < transform.position.x))))
+        if (GameManager.getHumanState() == 0) {
+            speed = walkSpeed;
+            if((direction.x == 0.0f && ((direction.z > 0 && target[current].position.z > transform.position.z)||(direction.z < 0 && target[current].position.z < transform.position.z)))||(direction.z==0.0f && ((direction.x > 0 && target[current].position.x > transform.position.x)||(direction.x < 0 && target[current].position.x < transform.position.x))))
             {
                 if (direction.x == 0.0f){
                     if (direction.z > 0){
@@ -72,11 +75,12 @@ public class Human_move_1 : MonoBehaviour
                 angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;
                 transform.eulerAngles = Vector3.up * angle;
             }
-        }else if (GameManager.getHumanState()==1){
+        } else if (GameManager.getHumanState() == 1) {
             //Stun + Add FearGauge
             speed = 0;
             countdown();
-        }else if (GameManager.getHumanState()==2){
+        } else if (GameManager.getHumanState() == 2) {
+            speed = runSpeed;
             //Run + Add FearGauge
             if (!haunted){
                 current = (current+target.Length-1)%target.Length;
@@ -85,47 +89,45 @@ public class Human_move_1 : MonoBehaviour
                 transform.eulerAngles = Vector3.up * angle;
                 haunted = true;
             }
-            if((direction.x==0.0f && ((direction.z > 0 && target[current].position.z > transform.position.z)||(direction.z < 0 && target[current].position.z < transform.position.z)))||(direction.z==0.0f && ((direction.x > 0 && target[current].position.x > transform.position.x)||(direction.x < 0 && target[current].position.x < transform.position.x))))
-            {
-                if (direction.x == 0.0f){
-                    if (direction.z > 0){
+            if((direction.x == 0.0f && ((direction.z > 0 && target[current].position.z > transform.position.z) ||
+                (direction.z < 0 && target[current].position.z < transform.position.z))) ||
+                (direction.z == 0.0f && ((direction.x > 0 && target[current].position.x > transform.position.x) ||
+                (direction.x < 0 && target[current].position.x < transform.position.x)))) {
+                if (direction.x == 0.0f) {
+                    if (direction.z > 0) {
                         transform.Translate(Vector3.forward * speed * Time.deltaTime,Space.World);
-                    }else{
+                    } else {
                         transform.Translate(Vector3.back * speed * Time.deltaTime,Space.World);
                     }
-                }else{
-                    if (direction.x > 0){
+                } else {
+                    if (direction.x > 0) {
                         transform.Translate(Vector3.right * speed * Time.deltaTime,Space.World);
-                    }else{
+                    } else {
                         transform.Translate(Vector3.left * speed * Time.deltaTime,Space.World);
                     }
                 }
-            }
-            else {
-                foreach (string x in room){
-                    if (x.Equals(target[current].name)){
-                        speed=0;
+            } else {
+                foreach (string x in room) {
+                    if (x.Equals(target[current].name)) {
+                        speed = 0;
                         GameManager.setHumanState(3);
-                        //GameManager.setHumanState(0);
-                        //haunted = false;
                         break;
                     }
                 }
-                if (GameManager.getHumanState()==2){
-                    current = (current+target.Length-1)%target.Length;
-                    direction = target[current].position - target[current+1].position;
+                if (GameManager.getHumanState() == 2) {
+                    current = (current + target.Length - 1) % target.Length;
+                    direction = target[current].position - target[current + 1].position;
                     angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg -90;
                     transform.eulerAngles = Vector3.up * angle;
                 }
             }
-        }else{
-            currentTime -=  1 * Time.deltaTime;
-			 if(currentTime <= 0) {
-                speed = 6;
+        } else {
+            currentLockdownTime -=  1 * Time.deltaTime;
+			if(currentLockdownTime <= 0) {
 				GameManager.setHumanState(0);
-                currentTime = startingTime;
+                currentLockdownTime = lockdownTime;
                 haunted = false;
-             }
+            }
         }
     }
 
@@ -134,12 +136,12 @@ public class Human_move_1 : MonoBehaviour
     }
 
     public void countdown(){
- 			 currentTime -=  1 * Time.deltaTime;
-			 if(currentTime <= 0) {
-			 	currentTime = 0;
-                speed = 6;
-				GameManager.setHumanState(0);
-                currentTime = startingTime;
-			 }
+ 		currentLockdownTime -=  1 * Time.deltaTime;
+		if(currentLockdownTime <= 0) {
+			currentLockdownTime = 0;
+            speed = walkSpeed;
+			GameManager.setHumanState(0);
+            currentLockdownTime = lockdownTime;
+		}
 	}
 }
