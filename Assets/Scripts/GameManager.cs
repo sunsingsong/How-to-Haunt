@@ -10,13 +10,18 @@ public class GameManager : MonoBehaviour {
 	
 	public float time = 50f;
 	public bool isWon = false;
+
 	public string ghost1ObjectName = "";
 	public string ghost2ObjectName = "";
 	public Dictionary<string,bool> sawFurnitures;
+
 	private int humanState; // 0=Normal, 1=Stun, 2=Run
+
 	float currentTime = 0f;
 	float startingTime = 10f;
 	bool shouldCountdown = false;
+
+	private float fearValue = 0f;
 
 	void Start() {
 		humanState = 0;
@@ -35,8 +40,6 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private float fearValue = 0f;
-
 	public void increaseFearValue(float value){
 		shouldCountdown = true;
 		fearValue += value;
@@ -44,7 +47,6 @@ public class GameManager : MonoBehaviour {
 
 	public void decreaseFearValue(float value){
 		fearValue -= value;
-		//shouldCountdown = false;
 	}
 
 	public float getFearValue(){
@@ -75,14 +77,18 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void setHumanState(int x){
-		humanState=x;
+		humanState = x;
 	}
 
 	public void countdown(){
- 			 currentTime -=  1 * Time.deltaTime;
-			 if(currentTime <= 0) {
-				 currentTime = 3f;
-				 decreaseFearValue(3);
-			 }
+		currentTime -=  1 * Time.deltaTime;
+		if(currentTime <= 0) {
+			currentTime = 3f;
+			decreaseFearValue(3);
+		}
+	}
+
+	public int calculateScore() {
+		return (int)fearValue * 10 + (int)time * 10;
 	}
 }
