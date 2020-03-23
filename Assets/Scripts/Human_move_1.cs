@@ -19,7 +19,7 @@ public class Human_move_1 : MonoBehaviour
     private Renderer sight;
     private Vector3 direction;
     private bool haunted=false;
-    private string[] room = {"target 0","target 4","target 11","target 14"};
+    private string[] room = {"target 16","target 17","target 18","target 19"};
 
     float currentTime = 0f;
 	float startingTime = 5f;
@@ -47,7 +47,7 @@ public class Human_move_1 : MonoBehaviour
             }
         }
 
-        sight.material.SetColor("_Color", (GameManager.getHumanState() == 2) ? activeColor : idleColor );
+        sight.material.SetColor("_Color", (GameManager.getHumanState() == 2 || GameManager.getHumanState() == 3) ? activeColor : idleColor );
 
         if (GameManager.getHumanState()==0)
         {
@@ -78,7 +78,7 @@ public class Human_move_1 : MonoBehaviour
             speed = 0;
             countdown();
             print("Nothing");
-        }else{
+        }else if (GameManager.getHumanState()==2){
             //Run + Add FearGauge
             if (!haunted){
                 current = (current+target.Length-1)%target.Length;
@@ -106,8 +106,10 @@ public class Human_move_1 : MonoBehaviour
             else {
                 foreach (string x in room){
                     if (x.Equals(target[current].name)){
-                        GameManager.setHumanState(0);
-                        haunted = false;
+                        speed=0;
+                        GameManager.setHumanState(3);
+                        //GameManager.setHumanState(0);
+                        //haunted = false;
                         break;
                     }
                 }
@@ -118,6 +120,14 @@ public class Human_move_1 : MonoBehaviour
                     transform.eulerAngles = Vector3.up * angle;
                 }
             }
+        }else{
+            currentTime -=  1 * Time.deltaTime;
+			 if(currentTime <= 0) {
+                speed = 6;
+				GameManager.setHumanState(0);
+                currentTime = startingTime;
+                haunted = false;
+             }
         }
     }
 
