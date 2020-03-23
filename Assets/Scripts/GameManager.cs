@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour {
 	public float time = 50f;
 	public string ghost1ObjectName = "";
 	public string ghost2ObjectName = "";
+	public float timeLeft = 0f;
 	public Dictionary<string,bool> sawFurnitures;
 
-	private int humanState; // 0 = Normal, 1 = Stun, 2 = Run, 3 = Lockdown
-
+	private int humanState = 0; // 0 = Normal, 1 = Stun, 2 = Run, 3 = Lockdown 
 	float currentGaugeDecreaseCountdownTime = 0f;
 	float gaugeDecreaseCountdownTime = 10f;
 	bool shouldCountdown = false;
@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour {
 	private float fearValue = 0f;
 
 	void Start() {
-		humanState = 0;
 		sawFurnitures = new Dictionary<string, bool>();
 		for (int i = 1; i <= 12; i++) {
 			sawFurnitures.Add("Furniture"+i,false);
@@ -35,6 +34,8 @@ public class GameManager : MonoBehaviour {
 		} else {
 			currentGaugeDecreaseCountdownTime = gaugeDecreaseCountdownTime;
 		}
+
+
 	}
 
 	public void increaseFearValue(float value){
@@ -84,10 +85,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public int calculateScore() {
-		return (int)fearValue * 10 + (int)time * 10;
+		return (int)fearValue * 10 + (int)timeLeft * 10;
 	}
 
 	public bool isWon(){
+		print(fearValue);
 		return fearValue >= 100f;
 	}
 }

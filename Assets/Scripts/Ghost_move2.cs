@@ -7,15 +7,18 @@ public class Ghost_move2 : MonoBehaviour
     public GameObject Player2;
     public int speed;
     public bool ghost2Intersect;
+    private GameManager gameManager;
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         ghost2Intersect=false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
@@ -29,7 +32,7 @@ public class Ghost_move2 : MonoBehaviour
             transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.RightShift)) {
-            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager = FindObjectOfType<GameManager>();
             gameManager.activateFurniture(2);
         }
     }

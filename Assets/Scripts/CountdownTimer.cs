@@ -11,11 +11,14 @@ public class CountdownTimer : MonoBehaviour {
 	public Text timeLabel;
     public GameManager GameManager;
     public RectTransform gameOverPanel;
+    public GameObject Player1;
+    public GameObject Player2;
 
     float currentTime = 0f;
 	float startingTime = 150f;
-
+    bool isStart = false ;
 	void Start() {
+        timeLabel.gameObject.SetActive(false);
         GameManager = FindObjectOfType<GameManager>();
          if(GameManager != null){
             initTimer();
@@ -24,6 +27,14 @@ public class CountdownTimer : MonoBehaviour {
 
     void Update() {
         countdownTime();
+        showPanel();
+        Player1.SetActive(GameManager.getHumanState() != -1);
+        Player2.SetActive(GameManager.getHumanState() != -1);
+        if(currentTime <= 90f && !isStart){
+            isStart = true;
+            timeLabel.gameObject.SetActive(true);
+            GameManager.setHumanState(0);
+        }
     }
 
     private void initTimer() {
@@ -36,17 +47,18 @@ public class CountdownTimer : MonoBehaviour {
     private void countdownTime() {
         if(timeLabel != null){
 			 currentTime -=  1 * Time.deltaTime;
+             GameManager.timeLeft = currentTime;
 			 timeLabel.text = "Time "+currentTime.ToString("0");
 			 if(currentTime <= 0) {
 			 	currentTime = 0;
-                showPanel();
 			 }
 		}
     }
 
     private void showPanel(){
-        gameOverPanel.gameObject.SetActive (true);
-       
+        if(currentTime == 0 || GameManager.isWon()){
+          gameOverPanel.gameObject.SetActive (true);
+        }
     }
 	
 }
