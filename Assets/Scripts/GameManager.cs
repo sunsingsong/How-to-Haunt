@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	
 	public float time = 50f;
-	public bool isWon = false;
 	public string ghost1ObjectName = "";
 	public string ghost2ObjectName = "";
 	public Dictionary<string,bool> sawFurnitures;
@@ -35,7 +34,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private float fearValue = 0f;
+	private float fearValue = 100f;
 
 	public void increaseFearValue(float value){
 		shouldCountdown = true;
@@ -82,7 +81,11 @@ public class GameManager : MonoBehaviour {
  			 currentTime -=  1 * Time.deltaTime;
 			 if(currentTime <= 0) {
 				 currentTime = 3f;
-				 decreaseFearValue(3);
+				 decreaseFearValue(2);
 			 }
+	}
+
+	public bool isWon(){
+		return fearValue >= 99f;
 	}
 }
