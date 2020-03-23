@@ -9,8 +9,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	
 	public float time = 50f;
-	public bool isWon = false;
-
 	public string ghost1ObjectName = "";
 	public string ghost2ObjectName = "";
 	public Dictionary<string,bool> sawFurnitures;
@@ -87,5 +85,9 @@ public class GameManager : MonoBehaviour {
 
 	public int calculateScore() {
 		return (int)fearValue * 10 + (int)time * 10;
+	}
+
+	public bool isWon(){
+		return fearValue >= 100f;
 	}
 }
