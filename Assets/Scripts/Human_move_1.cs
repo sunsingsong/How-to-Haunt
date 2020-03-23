@@ -38,7 +38,6 @@ public class Human_move_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(GameManager.getHumanState());
         bool ghost1Seen = ghost1.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
 		bool ghost2Seen = ghost2.GetComponent<Renderer>().bounds.Intersects(sight.bounds);
         if ((ghost1Seen && !ghost1.GetComponent<Ghost_move1>().ghost1Intersect) || (ghost2Seen && !ghost2.GetComponent<Ghost_move2>().ghost2Intersect)){
@@ -77,7 +76,6 @@ public class Human_move_1 : MonoBehaviour
             //Stun + Add FearGauge
             speed = 0;
             countdown();
-            print("Nothing");
         }else if (GameManager.getHumanState()==2){
             //Run + Add FearGauge
             if (!haunted){
@@ -142,8 +140,6 @@ public class Human_move_1 : MonoBehaviour
                 speed = 6;
 				GameManager.setHumanState(0);
                 currentTime = startingTime;
-                print(GameManager.getHumanState());
-                print("setState0");
 			 }
 	}
 }
