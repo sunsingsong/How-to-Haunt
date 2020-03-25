@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public int calculateScore() {
+		if(fearValue > 100) fearValue = 100;
 		return (int)fearValue * 10 + (int)timeLeft * 10;
 	}
 

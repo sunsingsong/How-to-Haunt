@@ -14224,7 +14224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b3c6a02da649d6bf72f525612bbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 108
+  time: 108.5
   ghost1ObjectName: 
   ghost2ObjectName: 
   timeLeft: 0
